@@ -15,8 +15,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                sh 'sudo apt update'
-                sh 'sudo apt install -y npm'
+                sh 'npm install'
                 sh 'npm test'
             }
         }
@@ -36,7 +35,7 @@ pipeline {
         stage('Docker Push') {
             steps {
                 withCredentials([usernamePassword(
-                    credentialsId: 'dockerhub', // Replace this with your Jenkins credential ID
+                    credentialsId: 'dockerhub',
                     usernameVariable: 'DOCKER_USER',
                     passwordVariable: 'DOCKER_PASS'
                 )]) {
